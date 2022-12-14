@@ -6,17 +6,28 @@ set $right l
 
 set $term kitty 
 
+# colors and wallpaper
+include "$HOME/.cache/wal/colors-sway"
+output * bg $wallpaper fill
+
 set $highlight #fbfaf9
 set $prompt #77674C
 set $font "JetBrains Mono ExtraBold 10"
 set $menu bemenu-run -b -p "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" -M 200 --fn $font | xargs swaymsg exec
 
-# colors and wallpaper
-include "$HOME/.cache/wal/colors-sway"
-output * bg "$HOME/Pictures/wp.jpg" fill 
+# screenshot for pentakills
+bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
 
-# no borders
-default_border none 
+# borders
+default_border pixel
+client.focused              $color1 $color1 $color1 $color1
+client.unfocused            $color1 $color1 $color1 $color1 
+client.focused_inactive     $color1 $color1 $color1 $color1 
+client.urgent               $color1 $color1 $color1 $color1 
+
+# default terminal windowed
+for_window [app_id="kitty"] floating enable
+for_window [class="firefox"] border none
 
     # start terminal
     bindsym $mod+Return exec $term
